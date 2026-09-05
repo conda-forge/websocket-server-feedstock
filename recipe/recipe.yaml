@@ -1,0 +1,43 @@
+schema_version: 1
+
+context:
+  name: websocket-server
+  version: "0.6.4"
+
+package:
+  name: ${{ name|lower }}
+  version: ${{ version }}
+
+source:
+  url: https://pypi.org/packages/source/${{ name[0] }}/${{ name }}/websocket_server-${{ version }}.tar.gz
+  sha256: a8a02d575905e50f6af90bbbc37d23d7e1b027630897f0eeefed6a3fb3c22e07
+
+build:
+  number: 2
+  noarch: python
+  script: ${{ PYTHON }} -m pip install . -vv --no-deps --no-build-isolation
+
+requirements:
+  host:
+    - python ${{ python_min }}.*
+    - pip
+    - setuptools
+  run:
+    - python >=${{ python_min }}
+
+tests:
+  - python:
+      imports:
+        - websocket_server
+      pip_check: true
+      python_version: ${{ python_min }}
+
+about:
+  summary: A simple fully working websocket-server in Python with no external dependencies
+  license: MIT
+  license_file: LICENSE
+  homepage: https://github.com/Pithikos/python-websocket-server
+
+extra:
+  recipe-maintainers:
+    - jan-janssen
