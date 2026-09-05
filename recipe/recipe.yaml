@@ -30,7 +30,9 @@ tests:
       imports:
         - websocket_server
       pip_check: true
-      python_version: ${{ python_min }}
+      python_version:
+        - ${{ python_min }}
+        - "*"
 
 about:
   summary: A simple fully working websocket-server in Python with no external dependencies
